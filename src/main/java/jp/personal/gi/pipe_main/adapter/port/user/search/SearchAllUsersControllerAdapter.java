@@ -20,7 +20,7 @@ public class SearchAllUsersControllerAdapter extends SearchAllUsersController {
         super(searchAllUsersService);
     }
 
-    @RequestMapping("/search/all")
+    @RequestMapping("user/search/all")
     @Override
     public Stream<UserRecord> get() {
         return super.get();

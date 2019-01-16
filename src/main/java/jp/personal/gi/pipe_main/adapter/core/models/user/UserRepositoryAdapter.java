@@ -36,6 +36,21 @@ public class UserRepositoryAdapter implements UserRepository {
     }
 
     @Override
+    public void store(User entity) {
+        this.map.put(entity.getId(), entity);
+    }
+
+    @Override
+    public void storeAll(Stream<? extends User> entities) {
+        entities.forEach(this::store);
+    }
+
+    @Override
+    public Optional<User> findBy(ContactInformation contactInformation) {
+        return this.map.values().stream().filter(user -> user.getContactInformation().equals(contactInformation)).findFirst();
+    }
+
+    @Override
     public Optional<User> findBy(UserId id) {
         return Optional.ofNullable(this.map.get(id));
     }

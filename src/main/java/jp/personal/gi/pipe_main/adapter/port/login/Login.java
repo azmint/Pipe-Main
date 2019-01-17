@@ -1,6 +1,6 @@
 package jp.personal.gi.pipe_main.adapter.port.login;
 
-import jp.personal.gi.pipe_main.core.models.user.UserRepository;
+import jp.personal.gi.pipe_main.core.models.account.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @EnableAutoConfiguration
 @RequestMapping("/login")
 public class Login {
-    private final UserRepository userRepository;
+    private final AccountRepository userRepository;
 
     @Autowired
-    public Login(UserRepository userRepository) {
+    public Login(AccountRepository userRepository) {
         this.userRepository = userRepository;
     }
 

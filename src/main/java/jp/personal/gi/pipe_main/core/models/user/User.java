@@ -1,31 +1,26 @@
 package jp.personal.gi.pipe_main.core.models.user;
 
+import jp.personal.gi.pipe_main.core.models.account.AccountId;
 import jp.personal.gi.pipe_main.core.support.entity.Entity;
 
 public class User extends Entity<UserId> {
+    private final AccountId accountId;
     private final UserName userName;
-    private final ContactInformation contactInformation;
-    private final Password password;
     private final Friends friends;
 
-    public User(UserId id, UserName userName, ContactInformation contactInformation, Password password, Friends friends) {
+    public User(UserId id, AccountId accountId, UserName userName, Friends friends) {
         super(id);
+        this.accountId = accountId;
         this.userName = userName;
-        this.contactInformation = contactInformation;
-        this.password = password;
         this.friends = friends;
+    }
+
+    public AccountId getAccountId() {
+        return accountId;
     }
 
     public UserName getUserName() {
         return userName;
-    }
-
-    public ContactInformation getContactInformation() {
-        return contactInformation;
-    }
-
-    public Password getPassword() {
-        return password;
     }
 
     public Friends getFriends() {
@@ -36,9 +31,8 @@ public class User extends Entity<UserId> {
     public String toString() {
         return "User{" +
                 "id=" + id +
+                ", accountId=" + accountId +
                 ", userName=" + userName +
-                ", contactInformation=" + contactInformation +
-                ", password=" + password +
                 ", friends=" + friends +
                 '}';
     }

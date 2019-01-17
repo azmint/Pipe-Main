@@ -1,6 +1,6 @@
 package jp.personal.gi.pipe_main.adapter.spring.security;
 
-import jp.personal.gi.pipe_main.core.models.user.*;
+import jp.personal.gi.pipe_main.core.models.account.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,8 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
-import java.util.stream.Stream;
 
 @Configuration
 @EnableWebSecurity
@@ -57,24 +55,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Configuration
     protected static class AuthenticationConfiguration
             extends GlobalAuthenticationConfigurerAdapter {
-        @Autowired
-        UserDetailsServiceImpl userDetailsService;
+        private final UserDetailsServiceImpl userDetailsService;
+        private final AccountRepository accountRepository;
+        private final AdminAccountSpecification adminAccountSpecification;
 
         @Autowired
-        UserRepository userRepository;
+        public AuthenticationConfiguration(UserDetailsServiceImpl userDetailsService, AccountRepository accountRepository, AdminAccountSpecification adminAccountSpecification) {
+            this.userDetailsService = userDetailsService;
+            this.accountRepository = accountRepository;
+            this.adminAccountSpecification = adminAccountSpecification;
+        }
 
         @Override
         public void init(AuthenticationManagerBuilder auth) throws Exception {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             auth.userDetailsService(userDetailsService)
                     .passwordEncoder(passwordEncoder);
-            this.userRepository.store(new User(
-                    new UserId(String.valueOf(9999L)),
-                    new UserName("root"),
-                    new ContactInformation("root@example.jp"),
-                    new Password(passwordEncoder.encode("root")),
-                    new Friends(Stream.empty())
-            ));
+
+            final AccountId id = this.accountRepository.nextId();
+            final MailAddress mailAddress = new MailAddress("root@example.jp");
+            final Password password = new Password(passwordEncoder.encode("root"));
+            final Account rootAccount = adminAccountSpecification.create(id, mailAddress, password);
+            this.accountRepository.store(rootAccount);
         }
     }
 }

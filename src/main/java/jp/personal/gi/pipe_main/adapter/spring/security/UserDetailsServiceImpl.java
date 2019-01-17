@@ -1,9 +1,9 @@
 package jp.personal.gi.pipe_main.adapter.spring.security;
 
-import jp.personal.gi.pipe_main.core.models.user.ContactInformation;
-import jp.personal.gi.pipe_main.core.models.user.Password;
-import jp.personal.gi.pipe_main.core.models.user.User;
-import jp.personal.gi.pipe_main.core.models.user.UserRepository;
+import jp.personal.gi.pipe_main.core.models.account.Account;
+import jp.personal.gi.pipe_main.core.models.account.AccountRepository;
+import jp.personal.gi.pipe_main.core.models.account.MailAddress;
+import jp.personal.gi.pipe_main.core.models.account.Password;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,17 +16,18 @@ import java.util.Optional;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-    private final UserRepository userRepository;
+    private final AccountRepository accountRepository;
 
     @Autowired
-    public UserDetailsServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserDetailsServiceImpl(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        ContactInformation contactInformation = new ContactInformation(s);
-        Optional<User> maybeUser = this.userRepository.findBy(contactInformation);
+        final MailAddress mailAddress = new MailAddress(s);
+        final Optional<Account> maybeAccount = this.accountRepository.findBy(mailAddress);
+
         return new UserDetails() {
             @Override
             public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -35,17 +36,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
             @Override
             public String getPassword() {
-                return maybeUser
-                        .map(User::getPassword)
+                return maybeAccount
+                        .map(Account::getPassword)
                         .map(Password::getValue)
                         .orElse(null);
             }
 
             @Override
             public String getUsername() {
-                return maybeUser
-                        .map(User::getContactInformation)
-                        .map(ContactInformation::getValue)
+                return maybeAccount
+                        .map(Account::getMailAddress)
+                        .map(MailAddress::getValue)
                         .orElse(null);
             }
 

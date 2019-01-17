@@ -3,29 +3,22 @@ package jp.personal.gi.pipe_main.core.models.talkroom;
 import jp.personal.gi.pipe_main.core.support.entity.Entity;
 
 public class TalkRoom extends Entity<TalkRoomId> {
-    private final SenderId senderId;
-    private final ReceiverId receiverId;
+    private final UserIdentifiers userIdentifiers;
 
-    public TalkRoom(TalkRoomId id, SenderId senderId, ReceiverId receiverId) {
+    public TalkRoom(TalkRoomId id, UserIdentifiers userIdentifiers) {
         super(id);
-        this.senderId = senderId;
-        this.receiverId = receiverId;
+        this.userIdentifiers = userIdentifiers;
     }
 
-    public SenderId getSenderId() {
-        return senderId;
-    }
-
-    public ReceiverId getReceiverId() {
-        return receiverId;
+    public UserIdentifiers getUserIdentifiers() {
+        return userIdentifiers;
     }
 
     @Override
     public String toString() {
         return "TalkRoom{" +
                 "id=" + id +
-                ", senderId=" + senderId +
-                ", receiverId=" + receiverId +
+                ", userIdentifiers=" + userIdentifiers +
                 '}';
     }
 }

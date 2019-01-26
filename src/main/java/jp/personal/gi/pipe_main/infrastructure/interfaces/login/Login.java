@@ -1,4 +1,4 @@
-package jp.personal.gi.pipe_main.infrastructure.port.login;
+package jp.personal.gi.pipe_main.infrastructure.interfaces.login;
 
 import jp.personal.gi.pipe_main.domain.models.account.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;

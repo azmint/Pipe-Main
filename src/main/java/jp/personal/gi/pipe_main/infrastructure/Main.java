@@ -14,6 +14,6 @@ public class Main {
 
     @RequestMapping("/")
     public String login() {
-        return "index.html";
+        return "index";
     }
 }

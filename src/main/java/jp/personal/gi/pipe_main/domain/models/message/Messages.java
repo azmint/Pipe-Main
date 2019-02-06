@@ -1,15 +1,13 @@
 package jp.personal.gi.pipe_main.domain.models.message;
 
-import java.util.Objects;
-import java.util.Optional;
-import java.util.stream.Stream;
+import java.util.*;
 
 public class Messages {
-    private static final Messages EMPTY = new Messages(Stream.empty());
+    private static final Messages EMPTY = new Messages(Collections.emptyList());
 
-    private final Stream<Message> values;
+    private final List<Message> values;
 
-    private Messages(Stream<Message> values) {
+    private Messages(List<Message> values) {
         this.values = values;
     }
 
@@ -18,7 +16,7 @@ public class Messages {
     }
 
     public Optional<Message> findBy(MessageId id) {
-        return this.values.filter(value -> value.matches(id)).findFirst();
+        return this.values.stream().filter(value -> value.matches(id)).findFirst();
     }
 
     @Override

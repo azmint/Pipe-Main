@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org/">
+<body>
+<div class="container">
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>アカウントID</th>
+            <th>ユーザ名</th>
+            <th>友達1</th>
+            <th>友達2</th>
+            <th>友達3</th>
+            <th>友達4</th>
+            <th>友達5</th>
+        </tr>
+        <tr th:each="user : ${users}" th:object="${user}">
+            <td th:text="*{id}"></td>
+            <td th:text="*{accountId}"></td>
+            <td th:text="*{userName}"></td>
+            <td th:text="*{friend_1}"></td>
+            <td th:text="*{friend_2}"></td>
+            <td th:text="*{friend_3}"></td>
+            <td th:text="*{friend_4}"></td>
+            <td th:text="*{friend_5}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

@@ -1,15 +1,24 @@
 package jp.personal.gi.pipe_main.domain.models.user;
 
-import jp.personal.gi.pipe_main.domain.support.ValueObject;
+import jp.personal.gi.pipe_main.domain.support.*;
 
-import java.util.Objects;
-import java.util.stream.Stream;
+import java.util.*;
 
 public class Friends implements ValueObject {
-    private final Stream<UserId> values;
+    private static final Friends EMPTY = new Friends(Collections.emptyList());
 
-    public Friends(Stream<UserId> values) {
+    private final List<UserId> values;
+
+    public Friends(List<UserId> values) {
         this.values = values;
+    }
+
+    public static Friends empty() {
+        return EMPTY;
+    }
+
+    public List<UserId> getValues() {
+        return values;
     }
 
     @Override

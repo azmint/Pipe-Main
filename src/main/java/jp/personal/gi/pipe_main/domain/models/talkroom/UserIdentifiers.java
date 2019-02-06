@@ -1,17 +1,17 @@
 package jp.personal.gi.pipe_main.domain.models.talkroom;
 
-import jp.personal.gi.pipe_main.domain.models.user.UserId;
+import jp.personal.gi.pipe_main.domain.models.user.*;
 
-import java.util.stream.Stream;
+import java.util.*;
 
 public class UserIdentifiers {
-    private final Stream<UserId> userIdentifiers;
+    private final List<UserId> userIdentifiers;
 
-    public UserIdentifiers(Stream<UserId> userIdentifiers) {
+    public UserIdentifiers(List<UserId> userIdentifiers) {
         this.userIdentifiers = userIdentifiers;
     }
 
-    public Stream<UserId> getUserIdentifiers() {
+    public List<UserId> getUserIdentifiers() {
         return userIdentifiers;
     }
 

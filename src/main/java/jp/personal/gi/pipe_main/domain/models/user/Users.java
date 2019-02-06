@@ -1,16 +1,15 @@
 package jp.personal.gi.pipe_main.domain.models.user;
 
-import jp.personal.gi.pipe_main.domain.models.message.Messages;
+import jp.personal.gi.pipe_main.domain.models.message.*;
 
-import java.util.Objects;
-import java.util.stream.Stream;
+import java.util.*;
 
 public class Users {
-    private static final Users EMPTY = new Users(Stream.empty());
+    private static final Users EMPTY = new Users(Collections.emptyList());
 
-    private final Stream<User> values;
+    private final List<User> values;
 
-    private Users(Stream<User> values) {
+    private Users(List<User> values) {
         this.values = values;
     }
 
@@ -18,7 +17,7 @@ public class Users {
         return EMPTY;
     }
 
-    public static Users of(Stream<User> values) {
+    public static Users of(List<User> values) {
         return new Users(values);
     }
 
@@ -26,8 +25,8 @@ public class Users {
         return Messages.empty();
     }
 
-    public Stream<User> toStream() {
-        return values;
+    public List<User> toList() {
+        return new ArrayList<>(values);
     }
 
     @Override

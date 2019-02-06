@@ -1,14 +1,14 @@
 package jp.personal.gi.pipe_main.interfaces.user.search;
 
-import jp.personal.gi.pipe_main.application.user.search.SearchAllUsersService;
-import jp.personal.gi.pipe_main.domain.models.user.Users;
-import jp.personal.gi.pipe_main.interfaces.user.UserPresenter;
-import jp.personal.gi.pipe_main.interfaces.user.UserRecord;
+import jp.personal.gi.pipe_main.application.user.search.*;
+import jp.personal.gi.pipe_main.domain.models.user.*;
+import jp.personal.gi.pipe_main.interfaces.user.*;
 
-import java.util.function.Supplier;
-import java.util.stream.Stream;
+import java.util.*;
+import java.util.function.*;
+import java.util.stream.*;
 
-public abstract class SearchAllUsersController implements Supplier<Stream<UserRecord>> {
+public abstract class SearchAllUsersController implements Supplier<List<UserRecord>> {
     private final SearchAllUsersService searchAllUsersService;
 
     public SearchAllUsersController(SearchAllUsersService searchAllUsersService) {
@@ -16,10 +16,12 @@ public abstract class SearchAllUsersController implements Supplier<Stream<UserRe
     }
 
     @Override
-    public Stream<UserRecord> get() {
+    public List<UserRecord> get() {
         Users allUsers = this.searchAllUsersService.get();
         return allUsers
-                .toStream()
-                .map(UserPresenter::new);
+                .toList()
+                .stream()
+                .map(UserPresenter::new)
+                .collect(Collectors.toList());
     }
 }

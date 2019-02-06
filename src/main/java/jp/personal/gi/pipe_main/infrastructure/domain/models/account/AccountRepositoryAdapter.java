@@ -1,15 +1,11 @@
 package jp.personal.gi.pipe_main.infrastructure.domain.models.account;
 
 import jp.personal.gi.pipe_main.domain.models.account.*;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.*;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Consumer;
-import java.util.function.LongConsumer;
-import java.util.function.LongFunction;
-import java.util.stream.Stream;
+import java.util.*;
+import java.util.function.*;
+import java.util.stream.*;
 
 @Repository
 public class AccountRepositoryAdapter implements AccountRepository {
@@ -47,7 +43,7 @@ public class AccountRepositoryAdapter implements AccountRepository {
     }
 
     @Override
-    public void storeAll(Stream<? extends Account> entities) {
+    public void storeAll(List<? extends Account> entities) {
         entities.forEach(this::store);
     }
 
@@ -66,8 +62,8 @@ public class AccountRepositoryAdapter implements AccountRepository {
     }
 
     @Override
-    public Stream<Account> findAll() {
-        return this.map.values().stream();
+    public List<Account> findAll() {
+        return this.map.values().stream().collect(Collectors.toList());
     }
 
     @Override

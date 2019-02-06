@@ -1,11 +1,9 @@
 package jp.personal.gi.pipe_main.application.user.search;
 
-import jp.personal.gi.pipe_main.domain.models.user.User;
-import jp.personal.gi.pipe_main.domain.models.user.UserRepository;
-import jp.personal.gi.pipe_main.domain.models.user.Users;
+import jp.personal.gi.pipe_main.domain.models.user.*;
 
-import java.util.function.Supplier;
-import java.util.stream.Stream;
+import java.util.*;
+import java.util.function.*;
 
 public abstract class SearchAllUsersService implements Supplier<Users> {
     private final UserRepository repository;
@@ -16,7 +14,7 @@ public abstract class SearchAllUsersService implements Supplier<Users> {
 
     @Override
     public Users get() {
-        Stream<User> allUsers = this.repository.findAll();
+        List<User> allUsers = this.repository.findAll();
         return Users.of(allUsers);
     }
 }

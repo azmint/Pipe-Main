@@ -1,14 +1,13 @@
 package jp.personal.gi.pipe_main.domain.models.account;
 
-import java.util.Objects;
-import java.util.stream.Stream;
+import java.util.*;
 
 public class Accounts {
-    private static final Accounts EMPTY = new Accounts(Stream.empty());
+    private static final Accounts EMPTY = new Accounts(Collections.emptyList());
 
-    private final Stream<Account> values;
+    private final List<Account> values;
 
-    private Accounts(Stream<Account> values) {
+    private Accounts(List<Account> values) {
         this.values = values;
     }
 
@@ -16,11 +15,11 @@ public class Accounts {
         return EMPTY;
     }
 
-    public static Accounts of(Stream<Account> values) {
+    public static Accounts of(List<Account> values) {
         return new Accounts(values);
     }
 
-    public Stream<Account> toStream() {
+    public List<Account> toList() {
         return this.values;
     }
 

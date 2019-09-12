@@ -12,7 +12,7 @@ public class SpecificationTest {
     @Test
     public void notSatisfiedBy_inCaseOfTrue() {
         Specification<String> instance = "AAA"::equals;
-        assertTrue(instance.notSatisfiedBy("aaa"));
+        assertFalse(instance.notSatisfiedBy("aaa"));
     }
 
     @Test

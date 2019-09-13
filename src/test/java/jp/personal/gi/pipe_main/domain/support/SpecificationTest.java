@@ -10,25 +10,25 @@ import static org.junit.Assert.*;
 public class SpecificationTest {
 
     @Test
-    public void notSatisfiedBy_inCaseOfTrue() {
+    public void notSatisfiedByTest_inCaseOfTrue() {
         Specification<String> instance = "AAA"::equals;
         assertTrue(instance.notSatisfiedBy("aaa"));
     }
 
     @Test
-    public void notSatisfiedBy_inCaseOfFalse() {
+    public void notSatisfiedByTest_inCaseOfFalse() {
         Specification<String> instance = "AAA"::equals;
         assertFalse(instance.notSatisfiedBy("AAA"));
     }
 
     @Test
-    public void not() {
+    public void notTest() {
         Specification<String> instance = "AAA"::equals;
         assertFalse(instance.not().isSatisfiedBy("AAA"));
     }
 
     @Test
-    public void and() {
+    public void andTest() {
         Specification<String> isAAA = "AAA"::equals;
         Specification<String> isThreeDigits = arg -> arg.length() == 3;
         Specification<String> instance = isAAA.and(isThreeDigits);
@@ -36,7 +36,7 @@ public class SpecificationTest {
     }
 
     @Test
-    public void andNot() {
+    public void andNotTest() {
         Specification<String> notLessThanThreeDigits = arg -> !(arg.length() < 3);
         Specification<String> isOverThanThreeDigits = arg -> arg.length() > 3;
         Specification<String> instance = notLessThanThreeDigits.andNot(isOverThanThreeDigits);
@@ -44,7 +44,7 @@ public class SpecificationTest {
     }
 
     @Test
-    public void or() {
+    public void orTest() {
         {
             Specification<String> isAAA = "AAA"::equals;
             Specification<String> isBBB = "BBB"::equals;
@@ -55,7 +55,7 @@ public class SpecificationTest {
     }
 
     @Test
-    public void orNot() {
+    public void orNotTest() {
         Specification<String> isLessThanThreeDigits = arg -> arg.length() < 3;
         Specification<String> isOverThanThreeDigits = arg -> arg.length() > 3;
         Specification<String> instance = isLessThanThreeDigits.orNot(isOverThanThreeDigits);
@@ -63,14 +63,14 @@ public class SpecificationTest {
     }
 
     @Test
-    public void toPredicate() {
+    public void toPredicateTest() {
         Specification<String> specification = "AAA"::equals;
         Predicate<String> predicate = specification.toPredicate();
         assertTrue(predicate.test("AAA"));
     }
 
     @Test
-    public void satisfy() {
+    public void satisfyTest() {
         Specification<String> specification = "AAA"::equals;
         Optional<String> maybeAAA = specification.satisfy("AAA");
         assertEquals(maybeAAA, Optional.of("AAA"));

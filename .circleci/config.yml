@@ -63,14 +63,14 @@ jobs: # ステップの集合
           name: heroku maintenance off
           # メンテナンスモードをオフにします．
           command: heroku maintenance:off --app ${HEROKU_APP_NAME}
-  workflows:
-    version: 2
-    build_and_deploy:
-      jobs:
-        # - build
-        - deploy:
-            # requires:
-            #   - build
-            filters:
-              branches:
-                only: master
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      # - build
+      - deploy:
+          # requires:
+          #   - build
+          filters:
+            branches:
+              only: master

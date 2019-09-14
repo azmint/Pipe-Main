@@ -70,8 +70,8 @@ public class EntityTest {
 
     @Test
     public void notMatchesTest() {
-        assertFalse(MOCK_ENTITY_1_TARO_80.matches(MOCK_ID_1));
-        assertTrue(MOCK_ENTITY_1_TARO_80.matches(MOCK_ID_2));
+        assertFalse(MOCK_ENTITY_1_TARO_80.notMatches(MOCK_ID_1));
+        assertTrue(MOCK_ENTITY_1_TARO_80.notMatches(MOCK_ID_2));
     }
 
     @Test

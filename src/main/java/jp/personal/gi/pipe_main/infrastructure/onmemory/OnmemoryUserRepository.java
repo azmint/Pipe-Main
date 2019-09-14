@@ -1,4 +1,4 @@
-package jp.personal.gi.pipe_main.infrastructure.domain.models.user;
+package jp.personal.gi.pipe_main.infrastructure.onmemory;
 
 import jp.personal.gi.pipe_main.domain.models.account.*;
 import jp.personal.gi.pipe_main.domain.models.user.*;
@@ -9,10 +9,10 @@ import java.util.function.*;
 import java.util.stream.*;
 
 @Repository
-public class UserRepositoryAdapter implements UserRepository {
+public class OnmemoryUserRepository implements UserRepository {
     private final Map<UserId, User> map;
 
-    public UserRepositoryAdapter() {
+    public OnmemoryUserRepository() {
         this.map = new HashMap<>();
 
         LongFunction<User> toUser = longValue -> new User(
@@ -38,7 +38,7 @@ public class UserRepositoryAdapter implements UserRepository {
 
     @Override
     public List<User> findAll() {
-        return this.map.values().stream().collect(Collectors.toList());
+        return new ArrayList<>(this.map.values());
     }
 
     @Override

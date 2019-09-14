@@ -1,4 +1,4 @@
-package jp.personal.gi.pipe_main.infrastructure.domain.models.account;
+package jp.personal.gi.pipe_main.infrastructure.onmemory;
 
 import jp.personal.gi.pipe_main.domain.models.account.*;
 import org.springframework.stereotype.*;
@@ -8,11 +8,11 @@ import java.util.function.*;
 import java.util.stream.*;
 
 @Repository
-public class AccountRepositoryAdapter implements AccountRepository {
+public class OnmemoryAccountRepository implements AccountRepository {
     private long nextNo;
     private final Map<AccountId, Account> map;
 
-    public AccountRepositoryAdapter() {
+    public OnmemoryAccountRepository() {
         this.nextNo = 1L;
         this.map = new HashMap<>();
         LongFunction<Account> createAccount = serialNo -> new Account(
@@ -63,7 +63,7 @@ public class AccountRepositoryAdapter implements AccountRepository {
 
     @Override
     public List<Account> findAll() {
-        return this.map.values().stream().collect(Collectors.toList());
+        return new ArrayList<>(this.map.values());
     }
 
     @Override

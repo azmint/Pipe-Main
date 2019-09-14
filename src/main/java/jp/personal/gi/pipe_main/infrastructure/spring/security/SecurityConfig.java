@@ -57,13 +57,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             extends GlobalAuthenticationConfigurerAdapter {
         private final UserDetailsServiceImpl userDetailsService;
         private final AccountRepository accountRepository;
-        private final AdminAccountSpecification adminAccountSpecification;
+        private final AdminAccountSpecification adminAccountSpecification = new AdminAccountSpecification();
 
         @Autowired
-        public AuthenticationConfiguration(UserDetailsServiceImpl userDetailsService, AccountRepository accountRepository, AdminAccountSpecification adminAccountSpecification) {
+        public AuthenticationConfiguration(UserDetailsServiceImpl userDetailsService, AccountRepository accountRepository) {
             this.userDetailsService = userDetailsService;
             this.accountRepository = accountRepository;
-            this.adminAccountSpecification = adminAccountSpecification;
         }
 
         @Override

@@ -42,5 +42,5 @@ jobs: # ステップの集合
           name: heroku deploy
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-                git push heroku master
+                git push https://git.heroku.com/enigmatic-garden-66634.git master
             fi

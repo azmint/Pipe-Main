@@ -37,7 +37,7 @@ jobs: # ステップの集合
       - run:  bash .circleci/heroku_setup.sh
       - add_ssh_keys:
           fingerprints:
-            - "<メモした文字列>"
+            - "de:91:8c:85:98:e3:f2:84:42:d5:92:fd:17:46:3c:8f"
       - deploy:
           name: heroku deploy
           command: |

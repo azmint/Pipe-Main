@@ -34,7 +34,7 @@ jobs: # ステップの集合
           path: target/demo-java-spring-0.0.1-SNAPSHOT.jar
       # デプロイ例については https://circleci.com/docs/ja/2.0/deployment-integrations/ を参照してください
       - run:  wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
-      - run:  bash .circleci/heroku-setup.sh
+      - run:  bash .circleci/heroku_setup.sh
       - add_ssh_keys:
           fingerprints:
             - "<メモした文字列>"
